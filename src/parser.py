@@ -16,24 +16,32 @@ def main():
        
         sample_no += 1
 
-def dp_solution(tree, dfs_order,cnt,k):
-    sum=[0]*(tree.node_no+1)
-    for i in range(1,tree.node_no+1):
-        sum[i]=int(dfs_order[i-1].weight) +sum[i-1]
+def dp_solution(tree, dfs,child_count,k):
+    node_count=tree.node_no
+    total=[0]*(node_count)
+    for i in range(node_count):
+        if i==0:
+            total[i]=int(dfs[i].weight)
+        else:
+            total[i]=int(dfs[i].weight) +total[i-1]
     
-    f = [0]*(tree.node_no+1)
-    for j in range(1,tree.node_no+1):
-        f[j]=sum[j]
+    result = [0]*(node_count)
+    for j in range(node_count):
+        result[j]=total[j]
     
-    for k in range(1,k+1):
-        for n in range(tree.node_no,0,-1):
-            pos = n +cnt[n-1] -1
-            f[pos] =max (f[pos],f[n-1])
+    for k in range(k):
+        for n in reversed(range(0,node_count)):
+            pos = n +child_count[n]-1
+            if n!=0: 
+                result[pos] =max (result[pos],result[n-1])
+        
+        for k in range(node_count):
+            if k==0:
+                result[k]= max(result[k],int(dfs[k].weight))
+            else:
+                result[k]=max(result[k],result[k-1]+int(dfs[k].weight))
 
-        for k in range(1,tree.node_no+1):
-            f[k]=max(f[k],f[k-1]+int(dfs_order[k-1].weight))
-
-    print(f[tree.node_no])
+    print(result[node_count-1])
 
 def parse_data(path: str) -> tuple:
     """
