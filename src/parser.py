@@ -39,6 +39,48 @@ def parse_data(path: str) -> tuple:
             line_num += 1
     return tree, k
 
-
+def find_subtree_sums(weights):
+    sums = list()
+    for i in range(len(weights)):
+        sums.append(sum(weights[i : i + counts[i]]))
+    return sums
+        
 if __name__ == "__main__":
-    main()
+    #main()
+    tree, k = parse_data("resources/tree2.txt")    
+    dfs_order, counts = tree.dfs_order()
+    print(list(map(lambda v: v.weight, dfs_order)))
+    weights  = [int(v.weight) for v in dfs_order]
+    sums = find_subtree_sums(weights)
+
+    while k > 0 and len(weights) > 0:
+        print("Sums: ", sums)
+        min_sum = min(sums)
+        if min_sum > 0:
+            break
+        index_min = sums.index(min_sum) 
+          
+        print("min sum: ", min_sum, "index min : ", index_min, " Num nodes in subree: ", counts[index_min])
+        #sumsdan min sumı silelim
+        sums.remove(min_sum)
+        print("Min sum: ", min_sum)
+        num_nodes_in_subtree = counts[index_min]
+        #for i in range(index_min, index_min + num_nodes_in_subtree):
+        #    counts.pop(i)
+        #    weights.pop(i)
+        # o subtreeyi kaldıralım dfs orderdan ve weightlerden tekrar 
+        #sumlarıhesaplayalım
+        countsCpy = counts[: index_min]
+        countsCpy.extend(counts[index_min + num_nodes_in_subtree : ])
+        counts = countsCpy
+        weightsCpy = (weights[: index_min])
+        weightsCpy.extend(weights[index_min + num_nodes_in_subtree : ])
+        weights = weightsCpy
+        print("Counts:", counts)
+        print("Weight: ", weights)
+        k -= 1
+        sums = find_subtree_sums(weights)
+    print(sum(sums))
+    
+        
+       

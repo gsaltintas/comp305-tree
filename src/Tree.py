@@ -39,14 +39,17 @@ class Tree:
     def dfs_order(self) -> list:
         """ iterates over the tree's vertices with DFS and returns the list of dfs order """
         visited = []
-        return self.dfs_util(self.root, visited)
+        counts = [0 for i in range(len(self.vertices))]
+        return self.dfs_util(self.root, visited, counts)
 
-    def dfs_util(self, v, visited) -> list:
+    def dfs_util(self, v, visited, counts) -> list:
+        counts[v.id] = 1
         visited.append(v)
         for neigh in v.neighbors:
             if neigh not in visited:
-                self.dfs_util(neigh, visited)
-        return visited
+                self.dfs_util(neigh, visited, counts)
+                counts[v.id] += counts[neigh.id]
+        return visited, counts
 
     @property
     def root(self) -> Vertex:
