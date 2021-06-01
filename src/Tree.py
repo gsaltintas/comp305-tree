@@ -12,6 +12,11 @@ class Vertex:
     def add_neighbor(self, v):
         self.neighbors.append(v)
 
+    def remove_yourself(self):
+        for neighbor in self.neighbors:
+            neighbor.neighbors.remove(self)
+        self.neighbors = []        
+
     def __str__(self) -> str:
         return (f"Vertex {self.id}: {self.weight}")
 
@@ -49,6 +54,7 @@ class Tree:
             if neigh not in visited:
                 self.dfs_util(neigh, visited,count)
                 count[self.vertices.index(v)]+=count[self.vertices.index(neigh)]
+            
         return (visited,count)
 
     @property
