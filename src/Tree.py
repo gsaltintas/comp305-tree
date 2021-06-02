@@ -41,13 +41,13 @@ class Tree:
         """ adds an edge between vertices with indices v1 and v2 """
         return Edge(self.vertices[v1], self.vertices[v2])
 
-    def dfs_order(self) -> (list,list):
-        """ iterates over the tree's vertices with DFS and returns the list of dfs order """
+    def dfs_order(self) -> tuple:
+        """ iterates over the tree's vertices with DFS and returns two list of dfs order and counts (ie. the number of vertices in the subtree rooted at vertices[i])  """
         visited = []
         count = [0]*(len(self.vertices))
         return self.dfs_util(self.root, visited,count)
 
-    def dfs_util(self, v, visited,count) -> (list,list):
+    def dfs_util(self, v, visited,count) -> tuple:
         count[self.vertices.index(v)]=1
         visited.append(v)
         for neigh in v.neighbors:

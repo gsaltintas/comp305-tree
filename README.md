@@ -19,6 +19,11 @@ The Most Valuable Tree - Comp 305 Term Project
 - [ ] Test cases (at least 3 for each person)
 - [ ] Presentation & Explanation & Compilation of all appraoches (Enes)
 
+# Run
+Specify the algorithms with a flag `-d` for dynamic programming approach, `-g` for greedy.
+```bash
+python -m src.parser -dg
+```
 # Explanation
 ## Input
 *n, k <-* number of vertices, maximum cuts
