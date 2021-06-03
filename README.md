@@ -11,13 +11,18 @@ The Most Valuable Tree - Comp 305 Term Project
 - [x] Implement data structures (Gül Sena)
     - [x] Dictionary & list based graph
     - [x] Input parsing
-- [ ] Basic Greedy algorithm (Necla)
+- [x] Basic Greedy algorithm (Necla)
     - Do DFS on tree
     - Cut the most-negative valued subtree, update total value of the tree
     - Keep track of the number of cuts, return when $c\geq k$ or all subtree values >= 0
-- [ ] Dynamic programming approach (Yağmur)
-- [ ] Test cases (at least 3 for each person)
-- [ ] Presentation & Explanation & Compilation of all appraoches (Enes)
+- [ ] Dynamic programming approach (Yağmur & Enes)
+- [ ] Test cases (at least 3 for each person) 
+- [ ] Test cases re-draw
+- [ ] Presentation & Explanation & Compilation of all appraoches
+    - [ ] Greedy (Enes)
+    - [ ] Failed Approaches (Enes)
+    - [ ] DP approach (Necla)
+- [ ] Update README.md
 
 # Run
 Specify the algorithms with a flag `-d` for dynamic programming approach, `-g` for greedy.

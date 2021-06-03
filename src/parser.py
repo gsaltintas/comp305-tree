@@ -6,15 +6,16 @@ from src.algorithms import dp_solution, greedy_solution, find_subtree_sums
 
 
 def main(args):
-    sample_no = 0
+    sample_no = 1
     src_dir = os.path.dirname(os.path.realpath(__file__))
     for f in os.listdir(os.path.join(src_dir, "..", "resources")):
         f = os.path.join(src_dir, "..", "resources", f)
         tree, k = parse_data(f)
-        print(f"For the example #{sample_no}, tree:\n{tree}")
+        # print(f"For the example #{sample_no}, tree:\n{tree}")
         visited = []
         count = []
         (visited, count) = tree.dfs_order()
+        print(f"{'-'*15}\nEvaluating #{sample_no}")
         if args.dp:
             print(f"Dynamic Programming Approach for the Example #{sample_no}")
             dp_solution(tree, visited, count, k)
