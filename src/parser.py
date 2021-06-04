@@ -20,9 +20,8 @@ def main(args):
         print(f"{'-'*15}\nEvaluating #{sample_no}")
         if args.dp:
             print(f"Dynamic Programming Approach for the Example #{sample_no}")
-            algorithms.dp_solution(tree, visited, count, k)
-            print("Second solution: ")
-            algorithms.dp_solution_2(visited, count, i=0, k=k, n=tree.node_no)
+            algorithms.dp_solution(visited, count, i=1, k=k, n=tree.node_no)          
+
         if args.greedy:
             print(f"Greedy Approach for the Example #{sample_no}")
             algorithms.greedy_solution(tree, k)
@@ -57,9 +56,12 @@ def parse_data(path: str) -> tuple:
 
 
 def get_arguments():
-    parser = argparse.ArgumentParser(description="The most valuable tree source code")
-    parser.add_argument('-d', '--dp', help='Specify to run Dynamic Programming approach', action="store_true")
-    parser.add_argument('-g', '--greedy', help='Specify to Greedy approach', action="store_true")
+    parser = argparse.ArgumentParser(
+        description="The most valuable tree source code")
+    parser.add_argument(
+        '-d', '--dp', help='Specify to run Dynamic Programming approach', action="store_true")
+    parser.add_argument(
+        '-g', '--greedy', help='Specify to Greedy approach', action="store_true")
 
     return parser.parse_args()
 

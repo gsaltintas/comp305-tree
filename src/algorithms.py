@@ -1,5 +1,3 @@
-inf = 1e18
-
 class Algorithms:
 
     def __init__(self):
@@ -13,68 +11,40 @@ class Algorithms:
         if (i >= self.n):
             return 0
         if (k < 0):
-            return inf
+            return float("-inf")
 
-        if (self.dp_array[i][k] >= 0):
+
+        # if problem has been solved before, just return it. Checking if solved by first setting everything to -0.1
+        # which can no longer be the result as all nodes have integer values.
+        if (self.dp_array[i][k] != -0.1):
             return self.dp_array[i][k]
 
-        # recursion step 1
-        try:
-            self.dp_array[i][k] = self.dfs[i].weight + self.dp_recurse(i+1, k)
-        except Exception as e:
-            print(type(self.dfs[i].weight))
+        # first find the value if the segment starting at i'th vertex is not removed
+        self.dp_array[i][k] = int(self.dfs[i].weight) + self.dp_recurse(i+1, k)
 
         if k == 0:
             return self.dp_array[i][k]
-
+        # then get the maximum of no-cut or cut.
+        # cut is calculated by 
         self.dp_array[i][k] = max(self.dp_array[i][k], self.dp_recurse(
             i+self.child_count[i], k-1))
 
         return self.dp_array[i][k]
 
 
-    def dp_solution_2(self, dfs, child_count, i, k, n):
+    def dp_solution(self, dfs, child_count, i, k, n):
         # max values as defined in the problem
-        max_k = 201
-
         self.dfs = dfs
         self.child_count = child_count
         self.n = n
 
-        # initializing the memoization buffer for dynamic programming
-        self.dp_array = [[-1 for _ in range(max_k)] for _ in range(n)]
+        # initializing the memoization buffer for dynamic programming. 
+        self.dp_array = [[-0.1 for _ in range(k+1)] for _ in range(n)]
 
-        result = self.dp_recurse(i,k)
+        result = self.dp_recurse(i,k) + int(self.dfs[0].weight)
         print(result)
         return result
 
-
-    def dp_solution(self, tree, dfs, child_count, k):
-        node_count = tree.node_no
-        total = [0]*(node_count)
-        for i in range(node_count):
-            if i == 0:
-                total[i] = int(dfs[i].weight)
-            else:
-                total[i] = int(dfs[i].weight) + total[i-1]
-
-        result = [0]*(node_count)
-        for j in range(node_count):
-            result[j] = total[j]
-
-        for k in range(k):
-            for n in reversed(range(0, node_count)):
-                pos = n + child_count[n]-1
-                if n != 0:
-                    result[pos] = max(result[pos], result[n-1])
-
-            for k in range(node_count):
-                if k == 0:
-                    result[k] = max(result[k], int(dfs[k].weight))
-                else:
-                    result[k] = max(result[k], result[k-1]+int(dfs[k].weight))
-
-        print(result[node_count-1])
 
 
     def greedy_solution(self, tree, k):
