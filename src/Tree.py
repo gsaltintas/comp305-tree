@@ -10,12 +10,14 @@ class Vertex:
         self.neighbors = []
 
     def add_neighbor(self, v):
+        """ add vertex v to its neighbors, O(1) """
         self.neighbors.append(v)
 
     def remove_yourself(self):
+        """ removes the vertex from the neighbor list of its neighbors so that it can be safely deleted from the tree """
         for neighbor in self.neighbors:
             neighbor.neighbors.remove(self)
-        self.neighbors = []        
+        self.neighbors = []
 
     def __str__(self) -> str:
         return (f"Vertex {self.id}: {self.weight}")
@@ -45,17 +47,18 @@ class Tree:
         """ iterates over the tree's vertices with DFS and returns two list of dfs order and counts (ie. the number of vertices in the subtree rooted at vertices[i])  """
         visited = []
         count = [0]*(len(self.vertices))
-        return self.dfs_util(self.root, visited,count)
+        return self.dfs_util(self.root, visited, count)
 
-    def dfs_util(self, v, visited,count) -> tuple:
-        count[self.vertices.index(v)]=1
+    def dfs_util(self, v, visited, count) -> tuple:
+        count[self.vertices.index(v)] = 1
         visited.append(v)
         for neigh in v.neighbors:
             if neigh not in visited:
-                self.dfs_util(neigh, visited,count)
-                count[self.vertices.index(v)]+=count[self.vertices.index(neigh)]
-            
-        return (visited,count)
+                self.dfs_util(neigh, visited, count)
+                count[self.vertices.index(
+                    v)] += count[self.vertices.index(neigh)]
+
+        return (visited, count)
 
     @property
     def root(self) -> Vertex:
