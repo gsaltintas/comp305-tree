@@ -2,10 +2,12 @@ import argparse
 import os
 
 from src.Tree import Tree, Vertex, Edge
-from src.algorithms import dp_solution, greedy_solution, find_subtree_sums
+from src.algorithms import Algorithms
 
 
 def main(args):
+    algorithms = Algorithms()
+
     sample_no = 1
     src_dir = os.path.dirname(os.path.realpath(__file__))
     for f in os.listdir(os.path.join(src_dir, "..", "resources")):
@@ -18,10 +20,11 @@ def main(args):
         print(f"{'-'*15}\nEvaluating #{sample_no}")
         if args.dp:
             print(f"Dynamic Programming Approach for the Example #{sample_no}")
-            dp_solution(tree, visited, count, k)
+            algorithms.dp_solution(visited, count, i=1, k=k, n=tree.node_no)          
+
         if args.greedy:
             print(f"Greedy Approach for the Example #{sample_no}")
-            greedy_solution(tree, k)
+            algorithms.greedy_solution(tree, k)
         sample_no += 1
 
 
@@ -53,9 +56,12 @@ def parse_data(path: str) -> tuple:
 
 
 def get_arguments():
-    parser = argparse.ArgumentParser(description="The most valuable tree source code")
-    parser.add_argument('-d', '--dp', help='Specify to run Dynamic Programming approach', action="store_true")
-    parser.add_argument('-g', '--greedy', help='Specify to Greedy approach', action="store_true")
+    parser = argparse.ArgumentParser(
+        description="The most valuable tree source code")
+    parser.add_argument(
+        '-d', '--dp', help='Specify to run Dynamic Programming approach', action="store_true")
+    parser.add_argument(
+        '-g', '--greedy', help='Specify to Greedy approach', action="store_true")
 
     return parser.parse_args()
 
