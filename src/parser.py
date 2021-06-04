@@ -6,16 +6,16 @@ from src.algorithms import dp_solution, greedy_solution, find_subtree_sums
 
 
 def main(args):
-    sample_no = 1
     src_dir = os.path.dirname(os.path.realpath(__file__))
-    for f in os.listdir(os.path.join(src_dir, "..", "resources")):
-        f = os.path.join(src_dir, "..", "resources", f)
+    files_len = len(os.listdir(os.path.join(src_dir, "..", "resources")))
+    for sample_no in range(1, files_len+1):
+        f = os.path.join(src_dir, "..", "resources", "tree%d.txt" % sample_no)
         tree, k = parse_data(f)
         # print(f"For the example #{sample_no}, tree:\n{tree}")
         visited = []
         count = []
         (visited, count) = tree.dfs_order()
-        print(f"{'-'*15}\nEvaluating #{sample_no}")
+        print(f"{'-'*15}\nEvaluating Test Case #{sample_no}\tn={tree.node_no}, k={k}")
         if args.dp:
             print(f"Dynamic Programming Approach for the Example #{sample_no}")
             dp_solution(tree, visited, count, k)
@@ -53,9 +53,12 @@ def parse_data(path: str) -> tuple:
 
 
 def get_arguments():
-    parser = argparse.ArgumentParser(description="The most valuable tree source code")
-    parser.add_argument('-d', '--dp', help='Specify to run Dynamic Programming approach', action="store_true")
-    parser.add_argument('-g', '--greedy', help='Specify to Greedy approach', action="store_true")
+    parser = argparse.ArgumentParser(
+        description="The most valuable tree source code")
+    parser.add_argument(
+        '-d', '--dp', help='Specify to run Dynamic Programming approach', action="store_true")
+    parser.add_argument(
+        '-g', '--greedy', help='Specify to Greedy approach', action="store_true")
 
     return parser.parse_args()
 
