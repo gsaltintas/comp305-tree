@@ -1,0 +1,8 @@
+---------------
+Evaluating Test Case #5	n=10, k=1
+Dynamic Programming Approach for the Example #5
+12
+Total run time 0.01541
+Greedy Programming Approach for the Example #5
+12
+Total run time 0.01162

@@ -30,12 +30,15 @@ Specify the algorithms with a flag `-d` for dynamic programming approach, `-g` f
 python -m src.parser -dg
 ```
 
+# :pen: Output
+The evaluation of the two algorithms -see [Solutions](#pushpinsolutions)- are logged to console and saved into `output/` folder.
+
 # :school_satchel: Explanation
 ## :bookmark_tabs:	Input
 Test cases are included in the `resources` directory, if one wishes to add an extra test case they can add `treeX.txt` to resources where X should be strictly between 1 and total number of test cases in the directory.
 *n, k <-* number of vertices, maximum cuts
 *w1 ... wn <-* weights of the vertices
-*v1 v2 <-* edge betweem *v1* and *v2*
+*v1 v2 <-* edge between *v1* and *v2*
 
 ## :paperclip: Data Structures
 We implemented three basic data structures, *Graph*, *Edge*, and *Vertex*. 
@@ -43,7 +46,7 @@ We implemented three basic data structures, *Graph*, *Edge*, and *Vertex*.
 - Each vertex is specified with a weight and id, their appereance order in the input. 
     **Note** that the vertices are in 1-index in the input but they are converted to 0-index in the implementation and vi- sualizations in the presentation.
 - To mimmic cut behavior, each vertex 
-### :ear_of_rice:	Edge
+### :ear_of_rice: Edge
 Since three is an undirected graph and the edges are unweighted, an edge simply stores reference to its two vertices and adds the two vertices to each other's neighbors during creation.
 
 ### :herb: Tree

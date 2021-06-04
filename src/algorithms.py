@@ -42,7 +42,7 @@ class Algorithms:
         self.dp_array = [[-0.1 for _ in range(k+1)] for _ in range(n)]
 
         result = self.dp_recurse(i,k) + int(self.dfs[0].weight)
-        print(result)
+        # print(result)
         return result
 
 
@@ -88,7 +88,7 @@ class Algorithms:
             sums = self.find_subtree_sums(weights, counts)
             k -= 1
         # at the end weights will include the remaining nodes weights
-        print(sum(weights))
+        return sum(weights)
 
     # an helper function to calculate subtree sums
 
