@@ -2,10 +2,11 @@ import argparse
 import os
 
 from src.Tree import Tree, Vertex, Edge
-from src.algorithms import dp_solution, greedy_solution, find_subtree_sums
+from src.algorithms import Algorithms
 
 
 def main(args):
+    algorithms = Algorithms()
     src_dir = os.path.dirname(os.path.realpath(__file__))
     files_len = len(os.listdir(os.path.join(src_dir, "..", "resources")))
     for sample_no in range(1, files_len+1):
@@ -18,10 +19,11 @@ def main(args):
         print(f"{'-'*15}\nEvaluating Test Case #{sample_no}\tn={tree.node_no}, k={k}")
         if args.dp:
             print(f"Dynamic Programming Approach for the Example #{sample_no}")
-            dp_solution(tree, visited, count, k)
+            algorithms.dp_solution(visited, count, i=1, k=k, n=tree.node_no)          
+
         if args.greedy:
             print(f"Greedy Approach for the Example #{sample_no}")
-            greedy_solution(tree, k)
+            algorithms.greedy_solution(tree, k)
         sample_no += 1
 
 
